@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            display: flex;
+            gap:50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Recipe!</h1>
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action='/recipe/create' method='POST'>
+        <div>
+            Name: <input type='text' name='name'><br>
+            Description:<br>
+            <textarea name='description'></textarea><br>
+            Instructions:<br>
+            <textarea name='instructions'></textarea><br>
+            <input type='submit' value='Create'>
+        </div>
+        <div>
+        <a href='/dashboard'>Dashboard</a>
+        <a href='/logout'>Logout</a>
+        <br><br>
+        Date: <input type='date' name='date'><br>
+        <p>Under 30 minutes?</p>
+        <input type="radio" name='under_30' value='no' class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label"  for="no">No</label>
+        <input type="radio" value='yes'  name='under_30' class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="yes">Yes</label>
+        </div>
+    </form>
+</body>
+</html>

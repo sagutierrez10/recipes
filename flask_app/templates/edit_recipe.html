@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Edit {{recipe.name}}</p>
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action='/recipes/{{recipe.id}}/update' method='POST'>
+        <a href='/dashboard'>Dashboard</a>
+        <a href='/logout'>Logout</a>
+        <br>
+        <br>
+        Name: <input type='text' name='name' value='{{recipe.name}}'><br>
+        Description:<br>
+        <textarea name='description'>{{recipe.description}}</textarea><br>
+        Instructions:<br>
+        <textarea name='instructions'>{{recipe.instructions}}</textarea><br><br>
+        Date: <input type='date' name='date' value="{{recipe.date.strftime('%Y-%m-%d')}}"><br><br>
+        <p>Under 30 minutes?</p>
+        <input type="radio" name='under_30' value='no' class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label"  for="no">No</label>
+        <input type="radio" value='yes'  name='under_30' class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="yes">Yes</label><br><br>
+        <input type='submit' value='Update'>
+    </form>
+</body>
+</html>
